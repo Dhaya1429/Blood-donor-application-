@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Blood Donor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============ LOGIN SCREEN ============ -->
+  <section id="loginScreen" class="screen active">
+    <div class="login-wrap">
+      <div class="login-logo">
+        <span class="drop">🩸</span>
+        <h1>Blood Donor</h1>
+        <p class="tagline">Every drop counts. Save a life today.</p>
+      </div>
+
+      <div class="role-tabs" id="roleTabs">
+        <button class="role-tab active" data-role="patient">User / Patient</button>
+        <button class="role-tab" data-role="donor">Donor</button>
+        <button class="role-tab" data-role="admin">Admin</button>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="field">
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" placeholder="Enter username" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter password" autocomplete="off">
+        </div>
+        <p id="loginError" class="error-text hidden"></p>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+      </form>
+
+      <div class="demo-creds" id="demoCreds">
+        <p class="demo-title">Demo credentials</p>
+        <p><strong>Patient:</strong> user / user123</p>
+        <p><strong>Donor:</strong> donor / donor123</p>
+        <p><strong>Admin:</strong> admin / admin123</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAIN APP SHELL ============ -->
+  <div id="mainShell" class="screen">
+
+    <header id="topBar">
+      <div class="topbar-left">
+        <span class="drop small">🩸</span>
+        <span class="app-title">Blood Donor</span>
+      </div>
+      <div class="topbar-right">
+        <button id="notifBtn" class="icon-btn" aria-label="Notifications">
+          🔔
+          <span id="notifBadge" class="badge hidden">0</span>
+        </button>
+        <button id="logoutBtn" class="icon-btn" aria-label="Logout">⎋</button>
+      </div>
+    </header>
+
+    <main id="pageContainer">
+
+      <!-- HOME -->
+      <section id="page-home" class="page active">
+        <div id="homeContent"></div>
+      </section>
+
+      <!-- FIND DONOR -->
+      <section id="page-find" class="page">
+        <h2 class="page-title">Find Blood Donor</h2>
+        <div class="filter-bar">
+          <select id="findBloodGroup">
+            <option value="">All Blood Groups</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+          <input type="text" id="findCity" placeholder="City / Area">
+          <button id="findSearchBtn" class="btn btn-primary">Search</button>
+        </div>
+        <div id="findResults" class="card-list"></div>
+      </section>
+
+      <!-- REGISTER DONOR -->
+      <section id="page-register" class="page">
+        <h2 class="page-title">Register as Donor</h2>
+        <form id="registerForm" class="form">
+          <div class="field">
+            <label for="regName">Full Name</label>
+            <input type="text" id="regName" placeholder="e.g. Ayesha Khan">
+            <span class="field-error" id="err-regName"></span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="regAge">Age</label>
+              <input type="number" id="regAge" placeholder="18-65">
+              <span class="field-error" id="err-regAge"></span>
+            </div>
+            <div class="field">
+              <label for="regGender">Gender</label>
+              <select id="regGender">
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="field-error" id="err-regGender"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="regBloodGroup">Blood Group</label>
+            <select id="regBloodGroup">
+              <option value="">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+            <span class="field-error" id="err-regBloodGroup"></span>
+          </div>
+          <div class="field">
+            <label for="regPhone">Phone Number</label>
+            <input type="tel" id="regPhone" placeholder="10-digit number">
+            <span class="field-error" id="err-regPhone"></span>
+          </div>
+          <div class="field">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" placeholder="you@example.com">
+            <span class="field-error" id="err-regEmail"></span>
+          </div>
+          <div class="field">
+            <label for="regCity">City / Area</label>
+            <input type="text" id="regCity" placeholder="e.g. Springfield">
+            <span class="field-error" id="err-regCity"></span>
+          </div>
+          <div class="field">
+            <label for="regLastDonation">Last Donation Date</label>
+            <input type="date" id="regLastDonation">
+          </div>
+          <div class="field">
+            <label for="regAvailability">Availability Status</label>
+            <select id="regAvailability">
+              <option value="Available">Available</option>
+              <option value="Not Available">Not Available</option>
+            </select>
+          </div>
+          <p id="registerSuccess" class="success-text hidden">🎉 Registration successful! You now appear in the donor list.</p>
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+      </section>
+
+      <!-- REQUESTS -->
+      <section id="page-requests" class="page">
+        <h2 class="page-title">Blood Requests</h2>
+
+        <button id="newRequestToggle" class="btn btn-secondary btn-block">+ New Emergency Request</button>
+
+        <form id="requestForm" class="form hidden">
+          <div class="emergency-tag">⚠ Emergency Priority Request</div>
+          <div class="field">
+            <label for="reqPatientName">Patient Name</label>
+            <input type="text" id="reqPatientName" placeholder="Patient full name">
+            <span class="field-error" id="err-reqPatientName"></span>
+          </div>
+          <div class="field">
+            <label for="reqBloodGroup">Blood Group</label>
+            <select id="reqBloodGroup">
+              <option value="">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+            <span class="field-error" id="err-reqBloodGroup"></span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="reqUnits">Required Units</label>
+              <input type="number" id="reqUnits" placeholder="e.g. 2" min="1">
+              <span class="field-error" id="err-reqUnits"></span>
+            </div>
+            <div class="field">
+              <label for="reqDate">Required Date</label>
+              <input type="date" id="reqDate">
+              <span class="field-error" id="err-reqDate"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="reqHospital">Hospital Name</label>
+            <input type="text" id="reqHospital" placeholder="e.g. City General Hospital">
+            <span class="field-error" id="err-reqHospital"></span>
+          </div>
+          <div class="field">
+            <label for="reqCity">City / Area</label>
+            <input type="text" id="reqCity" placeholder="e.g. Springfield">
+            <span class="field-error" id="err-reqCity"></span>
+          </div>
+          <div class="field">
+            <label for="reqContact">Contact Number</label>
+            <input type="tel" id="reqContact" placeholder="10-digit number">
+            <span class="field-error" id="err-reqContact"></span>
+          </div>
+          <p id="requestSuccess" class="success-text hidden">✅ Request submitted successfully!</p>
+          <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+        </form>
+
+        <h3 class="section-subtitle">Active Requests</h3>
+        <div id="requestsList" class="card-list"></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="page-profile" class="page">
+        <div id="profileContent"></div>
+      </section>
+
+      <!-- NOTIFICATIONS -->
+      <section id="page-notifications" class="page">
+        <div class="notif-header">
+          <button id="notifBackBtn" class="icon-btn">←</button>
+          <h2 class="page-title no-margin">Notifications</h2>
+          <button id="markAllReadBtn" class="link-btn">Mark all read</button>
+        </div>
+        <div id="notifList" class="card-list"></div>
+      </section>
+
+      <!-- ADMIN DASHBOARD -->
+      <section id="page-admin" class="page">
+        <div id="adminContent"></div>
+      </section>
+
+    </main>
+
+    <nav id="bottomNav">
+      <button class="nav-btn active" data-page="home"><span class="nav-icon">🏠</span><span>Home</span></button>
+      <button class="nav-btn" data-page="find"><span class="nav-icon">🔍</span><span>Find</span></button>
+      <button class="nav-btn" data-page="requests"><span class="nav-icon">🆘</span><span>Requests</span></button>
+      <button class="nav-btn" data-page="profile"><span class="nav-icon">👤</span><span>Profile</span></button>
+    </nav>
+
+  </div>
+
+</div>
+
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button id="contactModalClose" class="modal-close">✕</button>
+    <div id="contactModalBody"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
